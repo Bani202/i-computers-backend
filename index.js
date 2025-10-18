@@ -22,8 +22,10 @@ app.use(
         if(authorizationHeader != null){
            
             const token = authorizationHeader.replace("Bearer ","")
+             console.log(token);
+            
 
-            jwt.verify(token, "secretkey#123",
+            /*jwt.verify(token, "secretkey#123",
                 (error, content)=>{
 
                     if(content == null){
@@ -41,7 +43,7 @@ app.use(
                         next()
                     }
                 }
-            )
+            )*/
 
 
         }else{
