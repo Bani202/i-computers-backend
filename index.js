@@ -3,8 +3,11 @@ import mongoose from "mongoose"
 import userrouter from "./routes/userrouter.js"
 import productrouter from "./routes/productrouter.js"
 import jwt from "jsonwebtoken"
+import cors from "cors"
+import dotenv from "dotenv"
+dotenv.config()
 
-const mongoURI = "mongodb+srv://nipunab320:niPu123@cluster0.zwrtiur.mongodb.net/Nipuna?retryWrites=true&w=majority&appName=Cluster0"
+const mongoURI = process.env.MONGO_URL
 mongoose.connect(mongoURI).then(
     ()=>{
         console.log("database conected")
@@ -12,6 +15,8 @@ mongoose.connect(mongoURI).then(
 )
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 
@@ -22,10 +27,9 @@ app.use(
         if(authorizationHeader != null){
            
             const token = authorizationHeader.replace("Bearer ","")
-             console.log(token);
             
 
-            /*jwt.verify(token, "secretkey#123",
+            jwt.verify(token,process.env.JWT_SECRET,
                 (error, content)=>{
 
                     if(content == null){
@@ -43,7 +47,7 @@ app.use(
                         next()
                     }
                 }
-            )*/
+            )
 
 
         }else{
@@ -54,8 +58,8 @@ app.use(
 })
 
 
-app.use("/User",userrouter)
-app.use("/Product",productrouter)
+app.use("/api/user",userrouter)
+app.use("/api/product",productrouter)
 
 
 app.listen(5000 , 

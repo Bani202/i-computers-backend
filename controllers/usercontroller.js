@@ -50,7 +50,7 @@ export function loginUser(req, res) {
 					image: user.image,
 				};
 
-				const token = jwt.sign(payload, "secretkey#123", {
+				const token = jwt.sign(payload, process.env.JWT_SECRET, {
 					expiresIn: "150h",
 				});
 
