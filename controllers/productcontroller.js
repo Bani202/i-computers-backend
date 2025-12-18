@@ -1,5 +1,5 @@
 import Product from "../model/Product.js";
-import { isadmin } from "./Usercontroller.js";
+import { isadmin } from "./usercontroller.js";
 
 export function createProduct(req,res){
     if(!isadmin(req)){

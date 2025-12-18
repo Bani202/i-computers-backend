@@ -1,5 +1,5 @@
 import User from "../model/User.js";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
 export function createUser(req,res){
@@ -21,9 +21,15 @@ export function createUser(req,res){
         ()=>{
            res.json({
                 message: "User created succesfully"
-            })
-        }
+            });
+		}
     )
+	.catch((error)=>{
+		res.status(500).json({
+			message : "Error creating user",
+			error : error.message
+		});
+	})
 }
 
 export function loginUser(req, res) {
@@ -31,7 +37,7 @@ export function loginUser(req, res) {
 	const password = req.body.password;
 
 	User.find({ email: email }).then((users) => {
-		if (users[0] == null) {
+		if (users[0] === null) {
 			res.json({
 				message: "User not found",
 			});
@@ -43,10 +49,10 @@ export function loginUser(req, res) {
 			if (isPasswordCorrect) {
 				const payload = {
 					email: user.email,
-					firstName: user.firstName,
-					lastName: user.lastName,
+					firstName: user.firstname,
+					lastName: user.lastname,
 					role: user.role,
-					isEmailVerified: user.isEmailVerified,
+					isEmailVerified: user.isemailverified,
 					image: user.image,
 				};
 
@@ -57,6 +63,7 @@ export function loginUser(req, res) {
 				res.json({
 					message: "Login successful",
 					token: token,
+					role: user.role
 				});
 			} else {
 				res.status(401).json({

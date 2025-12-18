@@ -1,10 +1,10 @@
 import express from "express"
 import mongoose from "mongoose"
-import userrouter from "./routes/userrouter.js"
-import productrouter from "./routes/productrouter.js"
 import jwt from "jsonwebtoken"
 import cors from "cors"
 import dotenv from "dotenv"
+import productRouter from "./routes/productrouter.js"
+import userRouter from "./routes/userrouter.js"
 dotenv.config()
 
 const mongoURI = process.env.MONGO_URL
@@ -31,6 +31,7 @@ app.use(
 
             jwt.verify(token,process.env.JWT_SECRET,
                 (error, content)=>{
+                    console.log(content)
 
                     if(content == null){
 
@@ -58,8 +59,8 @@ app.use(
 })
 
 
-app.use("/api/user",userrouter)
-app.use("/api/product",productrouter)
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
 
 
 app.listen(5000 , 

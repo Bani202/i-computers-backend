@@ -1,21 +1,20 @@
 import exprees from "express";
 import { createProduct, deleteProduct, getallProducts, getProductByID, updateProduct } from "../controllers/productcontroller.js";
-import { get } from "mongoose";
 
-const productrouter = exprees.Router();
+const productRouter = exprees.Router();
 
-productrouter.get("/",getallProducts)
-productrouter.get("/treanding", (req,res)=>{
+productRouter.get("/",getallProducts)
+productRouter.get("/treanding", (req,res)=>{
     res.json(
         {message : "treanding product endpoint"}
     )
 })
-productrouter.post("/",createProduct)
+productRouter.post("/",createProduct)
 
-productrouter.get("/:productID",getProductByID)
+productRouter.get("/:productID",getProductByID)
 
-productrouter.delete("/:prductID",deleteProduct)
+productRouter.delete("/:prductID",deleteProduct)
 
-productrouter.put("/:productID",updateProduct)
+productRouter.put("/:productID",updateProduct)
 
-export default productrouter;
+export default productRouter;
