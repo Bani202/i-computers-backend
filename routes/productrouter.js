@@ -13,7 +13,7 @@ productRouter.post("/",createProduct)
 
 productRouter.get("/:productID",getProductByID)
 
-productRouter.delete("/:prductID",deleteProduct)
+productRouter.delete("/:productID",deleteProduct)
 
 productRouter.put("/:productID",updateProduct)
 

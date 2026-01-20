@@ -37,7 +37,7 @@ export function loginUser(req, res) {
 	const password = req.body.password;
 
 	User.find({ email: email }).then((users) => {
-		if (users[0] === null) {
+		if (users[0] == null) {
 			res.json({
 				message: "User not found",
 			});
@@ -57,7 +57,7 @@ export function loginUser(req, res) {
 				};
 
 				const token = jwt.sign(payload, process.env.JWT_SECRET, {
-					expiresIn: "150h",
+					//expiresIn: "150h",
 				});
 
 				res.json({
@@ -81,7 +81,7 @@ export function isadmin(req){
         return false;
     }
 
-    if(req.user != "admin"){
+    if(req.user.role != "admin"){
         return false;
     }
     return true;

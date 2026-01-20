@@ -20,6 +20,7 @@ app.use(cors())
 
 app.use(express.json())
 
+
 app.use(
     (req,res,next )=>{
         const authorizationHeader  = req.header("Authorization")
@@ -59,11 +60,15 @@ app.use(
 })
 
 
-app.use("/api/users",userRouter)
-app.use("/api/products",productRouter)
+app.use("/api/users",userRouter);
+app.use("/api/products",productRouter);
+
+/*app.post("/api/users/login" ,(req,res)=>{
+    res.send("LOGIN ROUTE HTT");
+});*/
 
 
-app.listen(5000 , 
+app.listen(3000 , 
     ()=>{
         console.log("server is running")
     }

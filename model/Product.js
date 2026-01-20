@@ -4,7 +4,7 @@ const productschema = new mongoose.Schema(
     {
         productID : {
             type : String,
-            requried : true,
+            required : true,
             unique : true
         },
         name : {
@@ -25,7 +25,7 @@ const productschema = new mongoose.Schema(
         },
         labeledprice : {
             type : Number,
-            requried : true
+            required : true
         },
         images : {
             type : [String],
@@ -33,12 +33,17 @@ const productschema = new mongoose.Schema(
         },
         category : {
             type : String,
-            requried : true
+            required : true
+        },
+        model : {
+            type : String,
+            required : true,
+            default : "Standed"
         },
         brand : {
             type : String,
             required :true,
-            default :"No brand"
+            default :"Generic"
         },
         stock : {
             type : Number,
